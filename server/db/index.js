@@ -1,3 +1,5 @@
+// server/db, sequelize initialized
+
 'use strict'
 const chalk = require('chalk');
 const Sequelize = require('sequelize');

@@ -1,4 +1,6 @@
-'use strict'; 
+// server, express initialized, router specified
+
+'use strict';
 
 const express = require('express');
 const path = require('path');
