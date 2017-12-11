@@ -1,0 +1,65 @@
+//brian's version
+
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchCampus } from '../reducers/campus-reducer';
+
+class SingleCampus extends Component {
+
+    componentDidMount() {
+      this.props.getCampus(this.props.match.params.id);
+    }
+
+    render(){
+      // console.log('SingleCampus props:', this.props.campuses);
+      return(
+        <div>
+        <h1>hello</h1>
+        <p>{this.props.campuses.name}</p>
+        <p>{this.props.campuses.description}</p>
+        <img src={this.props.campuses.imageUrl} />
+        </div>
+      );
+    }
+
+  }
+
+  function mapStateToProps(state) {
+    // console.log('state in SingleCampus:', state);
+    return {
+      campuses: state.campuses
+    };
+  }
+
+  function mapDispatchToProps(dispatch) {
+    return {
+      getCampus: (id) => {
+        // console.log('getCampus');
+        dispatch(fetchCampus(id));
+      }
+    }
+  }
+
+  const SingleCampusContainer = connect(mapStateToProps, mapDispatchToProps)(SingleCampus);
+
+  export default SingleCampusContainer;
+
+
+
+//functional version
+
+// import React, { Component } from 'react';
+// import { connect } from 'react-redux';
+// import { fetchCampus } from '../reducers/campus-reducer';
+
+// function SingleCampus(props) {
+//   console.log('props in singleCampus:', props.campus);
+//   return (
+//    <div>
+//    <h1>Interstellar Student 1</h1>
+//    <p>{props.campuses.name}</p>
+//    </div>
+//   );
+// }
+
+// export default SingleCampus;

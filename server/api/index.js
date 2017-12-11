@@ -9,6 +9,9 @@ const db = require('../db')
 	// Ideally you would have something to handle this, so if you have time try that out!
 
 	// NB: I THINK THEY MEAN A 404 page or error handler insted of the jokes page...
+
+apiRouter.use('/campus', require('./campus'));
+apiRouter.use('/students', require('./students'));
 apiRouter.get('/hello', (req, res) => res.send({hello: 'world'}))
 
 // You can put all routes in this file; HOWEVER, this file should almost be like a table of contents for the routers you create
