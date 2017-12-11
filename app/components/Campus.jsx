@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import AddCampus from './AddCampus';
+import { connect } from 'react-redux';
 
 const Campus = props => {
   return (
@@ -9,7 +9,7 @@ const Campus = props => {
         <Link to='/campus/new'><button>Add campus</button></Link>
       </div>
       <div>
-        <h1> Interstellar Campuses!</h1>
+        <h1>Interstellar Campuses!</h1>
       </div>
       <div>
         <ul>
@@ -32,6 +32,12 @@ const Campus = props => {
   );
 };
 
-export default Campus;
+function mapStateToProps (state) {
+  return {
+    campuses: state.campuses
+  };
+}
 
+const CampusContainer = connect(mapStateToProps)(Campus);
 
+export default CampusContainer;

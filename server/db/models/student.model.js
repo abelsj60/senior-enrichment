@@ -44,6 +44,14 @@ const Students = db.define('students', {
       return this.getDataValue('firstName') + ' ' + this.getDataValue('lastName');
     }
   }
+}, {
+  hooks: {
+    beforeValidate: function (post, object) {
+      if (typeof post.gpa !== 'number') {
+        post.gpa = 0;
+      }
+    }
+  }
 });
 
 module.exports = Students;

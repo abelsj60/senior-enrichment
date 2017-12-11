@@ -27,8 +27,7 @@ campusRouter.post('/', (req, res, next) => {
   Campus.create(req.body)
     .then(newCampus => {
       console.log('exiting server', newCampus);
-      res.json(newCampus);
-    })
-});
+    });
+  });
 
 module.exports = campusRouter;
