@@ -20,7 +20,9 @@ const Campus = props => {
                 <div>
                   <p>Name: {campus.name}</p>
                   <p>Description: {campus.description}</p>
-                  <Link to={`/campus/${campus.id}`}><button>{campus.name}</button></Link>
+                  <br />
+                  <Link to={`/campus/${campus.id}`}><button>Details...</button></Link>
+                  <br />
                   <img src={campus.imageUrl} />
                 </div>
               </li>

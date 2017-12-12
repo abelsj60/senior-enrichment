@@ -23,7 +23,7 @@ export function fetchCampuses () {
       .then(res => res.data)
       .then(campuses => {
         // console.log('----> campuses', campuses);
-        console.log('dispatching to store');
+        console.log('dispatching fetchCampusesThunk to store');
         dispatch(getCampuses(campuses));
       })
       // .catch(err);

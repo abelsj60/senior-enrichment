@@ -6,7 +6,6 @@ const Students = db.define('students', {
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true,
     validate: {
       isAlpha: true,
       notEmpty: true
@@ -15,7 +14,6 @@ const Students = db.define('students', {
   lastName: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true,
     validate: {
       isAlpha: true,
       notEmpty: true
@@ -32,24 +30,16 @@ const Students = db.define('students', {
   },
   gpa: {
     type: Sequelize.FLOAT,
-    allowNull: false,
     defaultValue: 0,
     validate: {
-      isFloat: true
+      min: 0,
+      max: 4
     }
   },
   fullName: {
     type: Sequelize.VIRTUAL,
     get () {
       return this.getDataValue('firstName') + ' ' + this.getDataValue('lastName');
-    }
-  }
-}, {
-  hooks: {
-    beforeValidate: function (post, object) {
-      if (typeof post.gpa !== 'number') {
-        post.gpa = 0;
-      }
     }
   }
 });

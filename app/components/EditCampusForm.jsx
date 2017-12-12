@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { fetchCampuses } from '../reducers/campus-reducer';
-import { connect } from 'react-redux';
 import axios from 'axios';
+import { withRouter } from 'react-router';
 
-class AddCampus extends Component {
+class EditCampusForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -25,11 +24,13 @@ class AddCampus extends Component {
 
   handleSubmit (event) {
     event.preventDefault();
+    // console.log('---> handleSubmit props:', this.props.fetchCampuses);
+    event.preventDefault();
     let tempCampusState = Object.assign({}, this.state);
     if (tempCampusState.imageUrl === '') {
       delete tempCampusState.imageUrl;
     }
-    axios.post('/api/campus/', tempCampusState)
+    axios.put(`/api/campus/${this.props.campus.id}`, tempCampusState)
       .then( () => {
         this.setState({
           name: '',
@@ -39,10 +40,9 @@ class AddCampus extends Component {
       })
       .then(() => {
         console.log('invoking thunk');
-        this.props.getCampuses();
-        this.props.history.push('/campus');
+        this.props.fetchCampuses();
+        this.props.history.push(`/campus/${this.props.campus.id}`);
       });
-    //withRouter: this.props.match.params.(:id)
   }
 
   render () {
@@ -50,7 +50,7 @@ class AddCampus extends Component {
     return (
       <div>
         <div>
-          <h1>My form!</h1>
+          <h1>Edit {this.props.campus.name}!</h1>
         </div>
         <div>
           <form onSubmit={this.handleSubmit}>
@@ -58,7 +58,7 @@ class AddCampus extends Component {
             <input
               type='text'
               name='name'
-              placeholder='Enter campus'
+              placeholder='Change name'
               value={this.state.name}
               onChange={this.handleChange} />
             <br />
@@ -66,14 +66,14 @@ class AddCampus extends Component {
             <input
               type='text'
               name='description'
-              placeholder='Describe school'
+              placeholder='Change description'
               value={this.state.description}
               onChange={this.handleChange} />
             <br />
             <label>Image:</label>
             <input type='text'
               name='image'
-              placeholder='Add image link'
+              placeholder='Change image'
               value={this.state.imageUrl}
               onChange={this.handleChange} />
             <br />
@@ -81,21 +81,22 @@ class AddCampus extends Component {
               type='submit'>Submit</button>
           </form>
         </div>
+        <div>
+          <div>
+            <h2>Current information</h2>
+          </div>
+          <div>
+            <p>Name: {this.props.campus.name}</p>
+            <p>Description: {this.props.campus.description}</p>
+            <img src={this.props.campus.imageUrl} />
+          </div>
+        </div>
       </div>
     );
   }
 
 }
 
-  function mapDispatchToProps (dispatch) {
-    console.log('calling thunk');
-    return {
-      getCampuses: function() {
-        dispatch(fetchCampuses());
-      }
-    };
-  }
+const EditFormWithHistoryWithRouter = withRouter(EditCampusForm);
 
-const AddCampusContainer = connect(null, mapDispatchToProps)(AddCampus);
-
-export default AddCampusContainer;
+export default EditFormWithHistoryWithRouter;

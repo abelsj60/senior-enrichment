@@ -8,7 +8,6 @@ const Campus = db.define('campus', {
     allowNull: false,
     validate: {
       notEmpty: true,
-      isAlphanumeric: true
     }
   },
   description: {

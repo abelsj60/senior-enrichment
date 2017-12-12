@@ -10,20 +10,22 @@ studentRouter.get('/', (req, res, next) => {
 });
 
 studentRouter.get('/:id', (req, res, next) => {
-  console.log('entering route',req.body)
+  console.log('entering student route',req.body)
   Students.findById(req.params.id)
     .then(student => {
-      console.log('exiting route', student);
+      console.log('exiting rstudent oute', student);
       res.json(student)}
     );
 });
 
 studentRouter.post('/', (req, res, next) => {
-  console.log('entering server for post', req.body);
+  console.log('entering student server for post', req.body);
   Students.create(req.body)
     .then(newStudent => {
-      console.log('exiting server', newStudent);
-    });
-  });
+      console.log('exiting student server for post', newStudent);
+      res.send();
+    })
+    .catch(next);
+});
 
 module.exports = studentRouter;

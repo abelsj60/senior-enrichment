@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchStudents } from '../reducers/student-reducer';
 import axios from 'axios';
 
 class AddStudent extends Component {
@@ -9,8 +10,8 @@ class AddStudent extends Component {
       firstName: '',
       lastName: '',
       email: '',
-      gpa: 0.0,
-      campusId: ''
+      gpa: '',
+      campusId: 1
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,15 +21,32 @@ class AddStudent extends Component {
     const enteredValue = {
       [event.target.name]: event.target.value
     };
-    // console.log(this);
     console.log('enteredValue:', enteredValue);
     this.setState(enteredValue);
   }
 
   handleSubmit (event) {
     event.preventDefault();
-    console.log('button clicked', typeof this.state.gpa);
-    axios.post('/api/students/', this.state);
+    let tempStudentState = Object.assign({}, this.state);
+    if (tempStudentState.gpa === '') {
+      delete tempStudentState.gpa;
+    }
+    axios.post('/api/students/', tempStudentState)
+      .then(() => {
+        this.setState({
+          firstName: '',
+          lastName: '',
+          email: '',
+          gpa: '',
+          campusId: 1
+        });
+      })
+      .then(() => {
+        console.log('invoking thunk');
+        this.props.getStudents();
+        console.log('about to change url');
+        this.props.history.push('/students');
+      })
   }
 
   render () {
@@ -73,7 +91,8 @@ class AddStudent extends Component {
             onChange={this.handleChange} />
             <br />
             <label>Campus:</label>
-            <select name='campusId'
+            <select
+              name='campusId'
               placeholder='Enter Campus'
               value={this.state.campusId}
               onChange={this.handleChange}>
@@ -100,6 +119,15 @@ function mapStateToProps (state) {
   };
 }
 
-const AddStudentContainer = connect(mapStateToProps)(AddStudent);
+function mapDispatchToProps (dispatch) {
+  console.log('calling thunk');
+  return {
+    getStudents: function() {
+      dispatch(fetchStudents());
+    }
+  };
+}
+
+const AddStudentContainer = connect(mapStateToProps, mapDispatchToProps)(AddStudent);
 
 export default AddStudentContainer;

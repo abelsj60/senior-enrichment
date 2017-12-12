@@ -18,9 +18,11 @@ function getStudents(students) {
 
 export function fetchStudents() {
   return function thunk(dispatch) {
+    console.log('running thunk');
     return axios.get('/api/students')
       .then(res => res.data)
       .then(students => {
+        console.log('dispatching fetchStudentsThunk to store');
         dispatch(getStudents(students));
       })
       // .catch(err);

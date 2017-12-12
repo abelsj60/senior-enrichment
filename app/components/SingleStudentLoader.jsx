@@ -11,9 +11,13 @@ class SingleStudent extends Component {
   }
 
   render () {
+    const studentSchool = this.props.campuses.filter(campus => {
+      return this.props.student.campusId === campus.id
+    });
+
     return (
       <div>
-        <Student student={this.props.student} />
+        <Student student={this.props.student} studentCampus={studentSchool} />
       </div>
     );
   }
@@ -23,7 +27,8 @@ class SingleStudent extends Component {
 function mapStateToProps(state) {
   console.log('mapping props to state', state);
   return {
-    student: state.student
+    student: state.student,
+    campuses: state.campuses
   };
 }
 

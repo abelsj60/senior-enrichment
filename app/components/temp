@@ -63,3 +63,126 @@ class SingleCampus extends Component {
 // }
 
 // export default SingleCampus;
+
+// SingleCampus Component, tryng to filter
+
+// function SingleCampus(props) {
+//   const filteredStudents = props.students.filter(student => {
+//     return student.campusId ===props.campus.id;
+//   })
+//   console.log('---> filteredStudents:', filteredStudents);
+
+//   return (
+//    <div>
+//     <h1>Interstellar Campus</h1>
+//     <p>Name: {props.campus.name}</p>
+//     <p>Description: {props.campus.description}</p>
+//     <img src={props.campus.imageUrl} />
+//     <h2>Super Students!</h2>
+//       <ul>
+//         {
+//           props.students && props.students.map(student =>
+//             (
+//             {if (student.campusId === props.campus.id)}
+//             <li key={student.id}>
+//               <div>
+//                 <p>Full name: {student.fullName}></p>
+//                 <p>Email: {student.email}</p>
+//                 <p>GPA: {student.gpa}</p>
+//               </div>
+//             </li>
+//           ))
+//         }
+//       </ul>
+//    </div>
+//   );
+// }
+
+// Old main.jsx @ 9:32
+
+// 'use strict'
+// import React from 'react'
+// import { render } from 'react-dom'
+// import { Provider } from 'react-redux'
+
+// import store from './store'
+// import Root from './components/Root';
+// import Campus from './components/Campus';
+// import Students from './components/Students';
+// import SingleCampusLoader from './components/SingleCampusLoader';
+// import SingleCampus from './components/SingleCampus';
+// import SingleStudentLoader from './components/SingleStudentLoader';
+// import AddCampus from './components/AddCampus';
+// import AddStudent from './components/AddStudent';
+// import NavBar from './components/NavBar';
+// import Home from './components/Home';
+// import { Link, Switch, Redirect, Route, HashRouter as Router } from 'react-router-dom';
+
+// render (
+//   <Provider store={store}>
+//     <Router>
+//       <div>
+//         <NavBar />
+//         <Switch>
+//           <Route exact path='/students' component={Students} />
+//           <Route exact path='/students/new' component={AddStudent} />
+//           <Route exact path='/students/:id' component={SingleStudentLoader} />
+//           <Route exact path='/campus' component={Campus} />
+//           <Route exact path='/campus/new' component={AddCampus} />
+//           <Route exact path='/campus/:id' component={SingleCampusLoader} />
+//           <Route path='/home' component={Home} />
+//         </Switch>
+//       </div>
+//     </Router>
+//   </Provider>,
+//   document.getElementById('main')
+// );
+
+// old Home.jsx @ 9:32
+
+// import React, { Component } from 'react';
+// import { connect } from 'react-redux';
+// import { fetchCampuses } from '../reducers/campus-reducer';
+// import { fetchStudents } from '../reducers/student-reducer';
+
+
+// class Home extends Component {
+
+//   componentDidMount () {
+//     console.log('invoking thunk');
+//     this.props.getCampuses();
+//     this.props.getStudents();
+//   }
+
+//   render () {
+//     return (
+//       <div>
+//       <h1>Home Page</h1>
+//       <img src='http://main.sfiacademy.org/images/10154000_10204333701377555_5192769921788264488_n.jpg' />
+//       </div>
+//     )
+//   }
+// }
+
+// const mapStateToProps = state => {
+//   return {
+//     campuses: state.campuses,
+//     students: state.students
+//   };
+// };
+
+// const mapDispatchToProps = dispatch => {
+//   console.log('calling thunk');
+//   return {
+//     getCampuses: function() {
+//       dispatch(fetchCampuses());
+//     },
+//     getStudents: function() {
+//       dispatch(fetchStudents());
+//     }
+//   };
+// };
+
+// const HomeContainer = connect(mapStateToProps, mapDispatchToProps)(Home);
+
+// export default HomeContainer;
