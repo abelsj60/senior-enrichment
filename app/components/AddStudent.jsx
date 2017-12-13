@@ -11,7 +11,7 @@ class AddStudent extends Component {
       lastName: '',
       email: '',
       gpa: '',
-      campusId: 1
+      campusId: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,6 +27,10 @@ class AddStudent extends Component {
 
   handleSubmit (event) {
     event.preventDefault();
+    if (event.target.campusId.value === '-1') {
+      alert('please select a campus');
+      return;
+    }
     let tempStudentState = Object.assign({}, this.state);
     if (tempStudentState.gpa === '') {
       delete tempStudentState.gpa;
@@ -38,7 +42,7 @@ class AddStudent extends Component {
           lastName: '',
           email: '',
           gpa: '',
-          campusId: 1
+          campusId: ''
         });
       })
       .then(() => {
@@ -96,6 +100,7 @@ class AddStudent extends Component {
               placeholder='Enter Campus'
               value={this.state.campusId}
               onChange={this.handleChange}>
+              <option value="-1">Select one</option>
               {
                 this.props.campuses && this.props.campuses.map( campus => (
                   <option key={campus.id} value={campus.id}>{campus.name}</option>

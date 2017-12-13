@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const Students = props => {
+function Students (props) {
   return (
     <div>
       <div>

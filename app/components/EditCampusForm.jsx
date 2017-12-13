@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import TransferStudent from './TransferStudent';
 import { withRouter } from 'react-router';
 
 class EditCampusForm extends Component {
@@ -46,6 +47,12 @@ class EditCampusForm extends Component {
   }
 
   render () {
+    const currentStudents = this.props.students.filter(student => {
+      if(student.campusId === this.props.campus.id);
+    });
+    const notCurrentStudents = this.props.students.filter(student => {
+      if(student.campusId !== this.props.campus.id);
+    })
 
     return (
       <div>
@@ -80,6 +87,9 @@ class EditCampusForm extends Component {
             <button
               type='submit'>Submit</button>
           </form>
+        </div>
+        <div>
+          <TransferStudent campus={this.props.campus} students={this.props.students} />
         </div>
         <div>
           <div>

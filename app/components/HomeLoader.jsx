@@ -10,6 +10,7 @@ import SingleStudentLoader from './SingleStudentLoader';
 import AddCampus from './AddCampus';
 import AddStudent from './AddStudent';
 import EditCampusFormLoader from './EditCampusFormLoader';
+import EditStudentFormLoader from './EditStudentFormLoader';
 import Home from './Home';
 import NavBar from './NavBar';
 import { fetchCampuses } from '../reducers/campus-reducer';
@@ -33,6 +34,7 @@ class HomeLoader extends Component {
         <Route exact path='/campus/new' component={AddCampus} />
         <Route exact path='/students/new' component={AddStudent} />
         <Route exact path='/campus/edit/:id' component={EditCampusFormLoader} />
+        <Route exact path='/students/edit/:id' component={EditStudentFormLoader} />
         <Route path='/campus/:id' component={SingleCampusLoader} />
         <Route path='/students/:id' component={SingleStudentLoader} />
         <Route exact path='/campus' component={Campus} />

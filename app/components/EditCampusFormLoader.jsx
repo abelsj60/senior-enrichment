@@ -12,7 +12,6 @@ class EditCampusFormLoader extends Component {
   }
 
   render(){
-    console.log('===> this.props.match.params:', this.props.match.params);
     return (
       <div>
         <EditCampusForm campus={this.props.campus} students={this.props.students} fetchCampuses={fetchCampuses} />
@@ -23,7 +22,6 @@ class EditCampusFormLoader extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('checking on students in SCL:', state);
   return {
     campus: state.campus,
     students: state.students

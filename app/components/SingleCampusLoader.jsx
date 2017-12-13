@@ -40,12 +40,3 @@ function mapDispatchToProps(dispatch) {
 const SingleCampusLoaderContainer = connect(mapStateToProps, mapDispatchToProps)(SingleCampusLoader);
 
 export default SingleCampusLoaderContainer;
-
-// <h1>Interstellar Campus!</h1>
-//   {this.props.campuses.length > 0 && (
-//     <div>
-//       <p>{this.props.campuses[0].name}</p>
-//       <p>{this.props.campuses[0].description}</p>
-//       <img src={this.props.campuses[0].imageUrl} />
-//     </div>
-//   )}
