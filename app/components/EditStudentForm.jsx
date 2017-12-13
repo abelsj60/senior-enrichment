@@ -32,8 +32,23 @@ class EditStudentForm extends Component {
     // console.log('---> handleSubmit props:', this.props.fetchCampuses);
     event.preventDefault();
     let tempCampusState = Object.assign({}, this.state);
+    if (tempCampusState.firstName === '') {
+      delete tempCampusState.firstName;
+    }
+    if (tempCampusState.lastName === '') {
+      delete tempCampusState.lastName;
+    }
+    if (tempCampusState.email === '') {
+      delete tempCampusState.email;
+    }
     if (tempCampusState.gpa === '') {
-      delete tempCampusState.imageUrl;
+      delete tempCampusState.gpa;
+    }
+    if (tempCampusState.campus === '') {
+      delete tempCampusState.campus;
+    }
+    if (tempCampusState.campusId === '') {
+      delete tempCampusState.campusId;
     }
     axios.put(`/api/students/${this.props.student.id}`, tempCampusState)
       .then( () => {
